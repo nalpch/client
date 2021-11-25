@@ -31,6 +31,8 @@ export type Appointment = {
   minutes: number
   mode: BookMode
   locationType: LocationType
+  isCanceled: boolean // true if canceled by vendor or customer
+  isAccepted: boolean // false if mode is "REQUEST" and vendor did not yet accept
 }
 
 export type TaC = {

@@ -1,4 +1,5 @@
 import { Timeslot } from './types'
+import { handleRequest } from './utils'
 
 export default function getTimeslots(
   vendorSlug: string,
@@ -18,12 +19,7 @@ export default function getTimeslots(
   }
   const params = new URLSearchParams(queryParams)
   return fetch(url + '?' + params.toString())
-    .then((res) => {
-      if (res.status !== 200) {
-        throw new Error('Bad response from server')
-      }
-      return res.json()
-    })
+    .then(handleRequest(200))
     .then((data) =>
       data.map(
         (timeslot): Timeslot => ({

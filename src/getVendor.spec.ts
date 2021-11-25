@@ -5,6 +5,13 @@ describe('getVendor', () => {
   it('should get a vendor', () => {
     return getVendor('martin').then((vendor) => {
       expect(vendor.slug).to.equal('martin')
+      expect(vendor.calendars).to.deep.equal([
+        {
+          id: 55,
+          name: 'Martin Eigenmann',
+          services: [75, 76, 131],
+        },
+      ])
       expect(vendor.tacs).to.deep.equal([
         {
           id: 'NALP_TAC',

@@ -1,4 +1,5 @@
 import { Appointment } from './types'
+import { transposeAppointment, handleRequest } from './utils'
 
 export default function bookAppointment(
   vendorSlug: string,
@@ -23,22 +24,8 @@ export default function bookAppointment(
     }),
     headers: { 'Content-Type': 'application/json' },
   })
-    .then((res) => {
-      if (res.status !== 200) {
-        throw new Error('Bad response from server')
-      }
-      return res.json()
-    })
-    .then(
-      (data): Appointment => ({
-        id: data.id,
-        start: new Date(data.start),
-        end: new Date(data.end),
-        minutes: data.duration,
-        mode: data.variant,
-        locationType: data.locationType,
-      }),
-    )
+    .then(handleRequest(200))
+    .then(transposeAppointment)
     .catch((reason) => {
       console.error(reason)
 

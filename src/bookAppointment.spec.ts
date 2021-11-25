@@ -18,6 +18,8 @@ describe('bookAppointment', () => {
       expect(a1.mode).to.equal('BOOK')
       expect(a1.locationType).to.equal('VIRTUAL')
       expect(a1.minutes).to.equal(60)
+      expect(a1.isCanceled).to.equal(false)
+      expect(a1.isAccepted).to.equal(true)
     })
   })
 })

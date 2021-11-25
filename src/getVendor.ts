@@ -1,4 +1,5 @@
 import { Vendor, TaC, Service, ServiceDuration, Calendar } from './types'
+import { handleRequest } from './utils'
 
 export default function getVendor(
   vendorSlug: string,
@@ -6,12 +7,7 @@ export default function getVendor(
 ): Promise<Vendor> {
   const url = `${apiUrl}/api/v2/vendors/${vendorSlug}/`
   return fetch(url)
-    .then((res) => {
-      if (res.status !== 200) {
-        throw new Error('Bad response from server')
-      }
-      return res.json()
-    })
+    .then(handleRequest(200))
     .then(
       (data): Vendor => ({
         slug: data.slug,

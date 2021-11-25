@@ -23,5 +23,11 @@ describe('api integration', () => {
     })
 
     expect(appointment.minutes).to.equal(60)
+
+    const canceledAppointment = await api.cancelAppointment({
+      appointmentId: appointment.id,
+    })
+
+    expect(canceledAppointment.isCanceled).to.equal(true)
   })
 })

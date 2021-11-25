@@ -1,6 +1,7 @@
 import getTimeslots from './getTimeslots'
 import getVendor from './getVendor'
 import bookAppointment from './bookAppointment'
+import cancelAppointment from './cancelAppointment'
 
 type getTimeslotProps = {
   durationId: string
@@ -15,7 +16,9 @@ type bookAppointmentProps = {
   note: string
   tacs: string[]
 }
-
+type cancelAppointmentProps = {
+  appointmentId: string
+}
 type Options = {
   endpont?: string
 }
@@ -55,6 +58,9 @@ export default class API {
       tacs,
       this.apiUrl,
     )
+  }
+  cancelAppointment({ appointmentId }: cancelAppointmentProps) {
+    return cancelAppointment(this.vendorSlug, appointmentId, this.apiUrl)
   }
   getVendor() {
     return getVendor(this.vendorSlug, this.apiUrl)

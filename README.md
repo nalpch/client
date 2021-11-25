@@ -16,10 +16,11 @@ This client uses fetch. Make sure to include a polyfill (e.g. [cross-fetch](http
 import nalpchClient from '@nalpch/client'
 
 const nalpClient = new nalpchClient('slug') // slug.nalp.ch
-const { durations, services, tacs } = await nalpClient.getVendor()
+const { durations, services, calendars, tacs } = await nalpClient.getVendor()
 const timeslots = await nalpClient.getTimeslots({
   durationId: duration[0].id,
   serviceId: service[0].id,
+  calendarId: calendars[0].id, // only required if vendor forces calendar selection
 })
 const appointment = await api.bookAppointment({
   timeslotId: timeslots[0].id,
@@ -29,6 +30,8 @@ const appointment = await api.bookAppointment({
   note: 'looking forward!', // will be visible for customer and vendor
   tacs: tacs.filter((tac) => tac.required).map((tac) => tac.id), // users have to accept terms and conditions
 })
+
+await api.cancelAppointment({ appointmentId: appointment.id })
 ```
 
 ## Identifiers

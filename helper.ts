@@ -251,13 +251,44 @@ const appointment = {
   tel: '',
 }
 
+const canceledAppointment = {
+  created: '2021-11-23T18:38:28.620462Z',
+  note: '',
+  start: '2021-11-26T13:15:00Z',
+  end: '2021-11-26T14:15:00Z',
+  id: '6c505d87-a39c-494d-888e-e0fed165b3d2',
+  service: { name: 'Tech Talk' },
+  calendar: {
+    chosen: false,
+    uuid: 'e9a12663-01c4-4dd1-9cc1-0ef735bdf40a',
+    name: 'Martin Eigenmann',
+    image:
+      'public/vendor_6325b3a8-be1a-4042-a831-fc67c7335ae5/calendars/4f4efb2d-f9cc-4a43-97dd-0a2_XFiooXQ.png',
+  },
+  cancelable: false,
+  canceled: true,
+  variant: 'BOOK',
+  accepted: true,
+  rejected: false,
+  duration: 60,
+  locationType: 'VIRTUAL',
+  email: 'customeremail@gmail.com',
+  tel: '',
+}
+
 fetchMock.mock(
   {
     url: 'https://api.nalp.ch/api/v2/vendors/martin/book/',
   },
   appointment,
 )
-
+fetchMock.mock(
+  {
+    url:
+      'https://api.nalp.ch/api/v2/appointments/6c505d87-a39c-494d-888e-e0fed165b3d2/cancel/',
+  },
+  canceledAppointment,
+)
 fetchMock.mock(
   {
     url:
